@@ -3,6 +3,7 @@ package com.example.book.entity;
 import com.example.book.dto.BookDTO;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.awt.print.Book;
@@ -11,6 +12,7 @@ import java.awt.print.Book;
 @Getter
 @Setter
 @Table(name = "book_table")
+@ToString
 public class BookEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,14 +23,20 @@ public class BookEntity {
     private String bookAuthor;
     @Column
     private int bookPrice;
-
-    // 기본생성자를 private으로
-    //    private BookEntity() {
-    //
-    //    }
+    //  테이블 설정
 
     public static BookEntity toSaveEntity(BookDTO bookDTO){
+        System.out.println("bookDTO = " + bookDTO);
         BookEntity bookEntity = new BookEntity();
+        bookEntity.setBookName(bookDTO.getBookName());
+        bookEntity.setBookAuthor(bookDTO.getBookAuthor());
+        bookEntity.setBookPrice(bookDTO.getBookPrice());
+        return bookEntity;
+    }
+
+    public static BookEntity toUpdateEntity(BookDTO bookDTO) {
+        BookEntity bookEntity = new BookEntity();
+        bookEntity.setId(bookDTO.getId());
         bookEntity.setBookName(bookDTO.getBookName());
         bookEntity.setBookAuthor(bookDTO.getBookAuthor());
         bookEntity.setBookPrice(bookDTO.getBookPrice());

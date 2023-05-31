@@ -1,0 +1,8 @@
+body {
+    background-color: whitesmoke;
+}
+h2{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
